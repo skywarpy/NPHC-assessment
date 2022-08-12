@@ -82,7 +82,7 @@ public class EmployeeService {
 				return updated;
 			} else {
 				for (Employee emp : employees) {
-					if (employeeRepo.existsById(emp.getId())) {
+					if (employeeExists(emp.getId())) {
 						if(!emp.equals(employeeRepo.getReferenceById(emp.getId()))) {
 							employeeRepo.save(emp);
 							updated=true;
@@ -142,5 +142,9 @@ public class EmployeeService {
 	public void deleteEmployee(String id) {
 		Employee emp = employeeRepo.findById(id).orElseThrow(()-> new EmployeeNotFoundException("No such employee"));
 		employeeRepo.delete(emp);
+	}
+	
+	public boolean employeeExists(String id) {
+		return employeeRepo.existsById(id);
 	}
 }
