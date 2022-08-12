@@ -3,7 +3,7 @@ REST API developed for NPHC assessment using Spring.
 
 To get started, import into Eclipse and run as Java application. Manual testing was done using Postman to simulate the GET, POST, PATCH, PULL and DELETE requests.
 
-CSV files that I used for testing are included in the folder **Postman Tests**.
+CSV files that I used for testing are included in this repository.
 
 ## Guide for uploading the CSV files to check functionality of POST:
 ### 1. Uploading to an empty database:
@@ -13,14 +13,17 @@ Use Postman to POST the file "CSVTest_UploadWithEmptyDatabase.csv" using the key
 Do step 1 first to populate the database.
 Use Postman to POST the file "CSVTest_Identical.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 200 with the response *"message": "Success but no data updated"*.
 
-### 3. Uploading a CSV file with comments the database:
+### 3. Uploading a CSV file with comments to the database:
 Use Postman to POST the file "CSVTest_commentedline.csv" using the key "file" to http://localhost:8080/users/upload. If you have done step 1, it should return HTTP Status 200 with the response *"message": "Success but no data updated"*. Else, it will return HTTP Status 201 with the response *"message": "Data has been successfully updated using CSVTest_UploadWithEmptyDatabase.csv"*.
 
-### 4. Uploading a CSV file with an invalid salary in the database:
+### 4. Uploading a CSV file with an invalid salary to the database:
 Use Postman to POST the file "CSVTest_NegativeSalary.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 400 with the response *"message": "Invalid salary"*.
 
-### 5. Uploading a CSV file with an invalid date format in the database:
+### 5. Uploading a CSV file with an invalid date format to the database:
 Use Postman to POST the file "CSVTest_WrongDateFormat.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 400 with the response *"message": "Invalid Date"*.
+
+### 6. Uploading a CSV file that contains duplicate IDs to the database:
+Use Postman to POST the file "CSVTest_duplicateIDs.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 400 with the response *"message": "Duplicate IDs in CSV"*.
 
 
 ## Design choices
