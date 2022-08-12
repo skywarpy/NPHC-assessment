@@ -6,24 +6,27 @@ To get started, import into Eclipse and run as Java application. Manual testing 
 CSV files that I used for testing are included in this repository.
 
 ## Guide for uploading the CSV files to check functionality of POST:
+
+All files are to be POSTed to http://localhost:8080/users/upload with the key "file".
+
 ### 1. Uploading to an empty database:
-Use Postman to POST the file "CSVTest_UploadWithEmptyDatabase.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 201 with the response *"message": "Data has been successfully updated using CSVTest_UploadWithEmptyDatabase.csv"*.
+Use Postman to POST the file "CSVTest_UploadWithEmptyDatabase.csv". It should return HTTP Status 201 with the response *"message": "Data has been successfully updated using CSVTest_UploadWithEmptyDatabase.csv"*.
 
 ### 2. Uploading a CSV file with no changes to the database:
 Do step 1 first to populate the database.
-Use Postman to POST the file "CSVTest_Identical.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 200 with the response *"message": "Success but no data updated"*.
+Use Postman to POST the file "CSVTest_Identical.csv". It should return HTTP Status 200 with the response *"message": "Success but no data updated"*.
 
 ### 3. Uploading a CSV file with comments to the database:
-Use Postman to POST the file "CSVTest_commentedline.csv" using the key "file" to http://localhost:8080/users/upload. If you have done step 1, it should return HTTP Status 200 with the response *"message": "Success but no data updated"*. Else, it will return HTTP Status 201 with the response *"message": "Data has been successfully updated using CSVTest_UploadWithEmptyDatabase.csv"*.
+Use Postman to POST the file "CSVTest_commentedline.csv". If you have done step 1, it should return HTTP Status 200 with the response *"message": "Success but no data updated"*. Else, it will return HTTP Status 201 with the response *"message": "Data has been successfully updated using CSVTest_UploadWithEmptyDatabase.csv"*.
 
 ### 4. Uploading a CSV file with an invalid salary to the database:
-Use Postman to POST the file "CSVTest_NegativeSalary.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 400 with the response *"message": "Invalid salary"*.
+Use Postman to POST the file "CSVTest_NegativeSalary.csv". It should return HTTP Status 400 with the response *"message": "Invalid salary"*.
 
 ### 5. Uploading a CSV file with an invalid date format to the database:
-Use Postman to POST the file "CSVTest_WrongDateFormat.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 400 with the response *"message": "Invalid Date"*.
+Use Postman to POST the file "CSVTest_WrongDateFormat.csv". It should return HTTP Status 400 with the response *"message": "Invalid Date"*.
 
 ### 6. Uploading a CSV file that contains duplicate IDs to the database:
-Use Postman to POST the file "CSVTest_duplicateIDs.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 400 with the response *"message": "Duplicate IDs in CSV"*.
+Use Postman to POST the file "CSVTest_duplicateIDs.csv". It should return HTTP Status 400 with the response *"message": "Duplicate IDs in CSV"*.
 
 
 ## Design choices
