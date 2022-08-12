@@ -1,12 +1,31 @@
 # NPHC-assessment
-REST API developed for NPHC assessment using Spring
+REST API developed for NPHC assessment using Spring.
 
 To get started, import into Eclipse and run as Java application. Manual testing was done using Postman to simulate the GET, POST, PATCH, PULL and DELETE requests.
+
+CSV files that I used for testing are included in the folder **Postman Tests**.
+
+## Guide for uploading the CSV files to check functionality of POST:
+### 1. Uploading to an empty database:
+Use Postman to POST the file "CSVTest_UploadWithEmptyDatabase.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 201 with the response *"message": "Data has been successfully updated using CSVTest_UploadWithEmptyDatabase.csv"*.
+
+### 2. Uploading a CSV file with no changes to the database:
+Do step 1 first to populate the database.
+Use Postman to POST the file "CSVTest_Identical.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 200 with the response *"message": "Success but no data updated"*.
+
+### 3. Uploading a CSV file with comments the database:
+Use Postman to POST the file "CSVTest_commentedline.csv" using the key "file" to http://localhost:8080/users/upload. If you have done step 1, it should return HTTP Status 200 with the response *"message": "Success but no data updated"*. Else, it will return HTTP Status 201 with the response *"message": "Data has been successfully updated using CSVTest_UploadWithEmptyDatabase.csv"*.
+
+### 4. Uploading a CSV file with an invalid salary in the database:
+Use Postman to POST the file "CSVTest_NegativeSalary.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 400 with the response *"message": "Invalid salary"*.
+
+### 5. Uploading a CSV file with an invalid date format in the database:
+Use Postman to POST the file "CSVTest_WrongDateFormat.csv" using the key "file" to http://localhost:8080/users/upload. It should return HTTP Status 400 with the response *"message": "Invalid Date"*.
 
 
 ## Design choices
 
-A H2 database was used as an in-memory database, to avoid actually initialising a MYSQL database on the system's hard drive, since this is a test application.
+A H2 database was used as an in-memory database, to avoid actually initialising a MYSQL database on the system's hard drive, since this is a test application. A tradeoff of this is that you will have to either POST a CSV file to populate the database, or write a data.sql file to populate the database on start-up. I chose not to write a data.sql file since I wanted to test the functionality of POSTing a CSV when the database was empty.
 
 The salary of employees are saved as BigDecimals, since that data format is more precise than a Double. Employees whose salaries are of low scale (e.g. 1.50) are cast as more BigDecimals with a higher scale (e.g. 1.500). This is to accomodate the storage of employees who have higher scaled salaries (e.g. 40.000) since the database has to store BigDecimals with the same level of precision and scale.
 
