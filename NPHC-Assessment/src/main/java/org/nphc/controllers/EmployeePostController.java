@@ -62,7 +62,9 @@ public class EmployeePostController {
 			} catch (DateFormatException e) {
 				message = e.getMessage();
 		        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
-			} 
+			} catch (TransactionSystemException e) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Invalid salary"));
+			}
 		} message = "File has to be in CSV format";
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
 		
