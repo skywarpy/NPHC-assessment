@@ -4,7 +4,7 @@ REST API developed for NPHC assessment using Spring
 To get started, import into Eclipse and run as Java application. Manual testing was done using Postman to simulate the GET, POST, PATCH, PULL and DELETE requests.
 
 
-##Design choices
+## Design choices
 
 A H2 database was used as an in-memory database, to avoid actually initialising a MYSQL database on the system's hard drive, since this is a test application.
 
