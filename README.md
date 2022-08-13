@@ -3,6 +3,9 @@ REST API developed for NPHC assessment using Spring.
 
 To get started, import into Eclipse and run as Java application. Manual testing was done using Postman to simulate the GET, POST, PATCH, PULL and DELETE requests.
 
+Requires the Lombok plugin for Eclipse.
+
+
 CSV files that I used for testing are included in this repository.
 
 ## Guide for uploading the CSV files to check functionality of POST:
