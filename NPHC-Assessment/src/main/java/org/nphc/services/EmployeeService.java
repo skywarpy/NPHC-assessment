@@ -147,4 +147,9 @@ public class EmployeeService {
 	public boolean employeeExists(String id) {
 		return employeeRepo.existsById(id);
 	}
+	
+	public List<String> getAllEmployeeLogins() {
+		return employeeRepo.findAllLogin();
+	}
+	
 }

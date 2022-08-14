@@ -15,4 +15,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, String>{
 	
 	@Query("select e from Employee e where e.salary >= ?1 and e.salary < ?2 order by e.id ASC")
 	List<Employee> findAllBySalaryRangeWithOffsetAndLimit(BigDecimal lowerSalary,BigDecimal higherSalary, Pageable page);
+	
+	@Query("select login from Employee e")
+	List<String> findAllLogin();
 }

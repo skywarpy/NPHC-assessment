@@ -78,14 +78,13 @@ public class EmployeePostController {
 		String employeeName = obj.getString("name");
 		String employeeLogin = obj.getString("login");
 		String employeeDate = obj.getString("startDate");
-		List<Employee> employees = fileService.getAllEmployees();
+		List<String> databaseEmployeeLogins = fileService.getAllEmployeeLogins();
 		if (fileService.employeeExists(employeeId)) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Employee ID already exists"));
 		} 
-		for (Employee emp : employees) {
-			if (emp.getLogin().equals(employeeLogin)) {
+
+		if(databaseEmployeeLogins.contains(employeeLogin)) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Employee login not unique"));
-			}
 		}
 		
 		try {

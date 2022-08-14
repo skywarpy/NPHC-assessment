@@ -42,12 +42,10 @@ public class EmployeePutPatchController {
 			String employeeName = obj.getString("name");
 			String employeeLogin = obj.getString("login");
 			String employeeDate = obj.getString("startDate");
-			List<Employee> employees = fileService.getAllEmployees();
-			for (Employee emp : employees) {
-				if (emp.getLogin().equals(employeeLogin)) {
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Employee login not unique"));
-				}
-			}
+			List<String> databaseEmployeeLogins = fileService.getAllEmployeeLogins();
+			if(databaseEmployeeLogins.contains(employeeLogin)) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Employee login not unique"));
+		}
 			try {
 				LocalDate employeeDateFormatted = dateFormatterUtil.getFormattedDate(employeeDate);
 				BigDecimal employeeSalaryParsed = salaryParserUtil.salaryJSON(obj);
@@ -80,11 +78,9 @@ public class EmployeePutPatchController {
 					employee.setName((String) change.getValue());
 					break;
 				case "login":
-					List<Employee> employees = fileService.getAllEmployees();
-					for (Employee emp : employees) {
-						if (emp.getLogin().equals(change.getValue())) {
-							return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Employee login not unique"));
-						} 
+					List<String> databaseEmployeeLogins = fileService.getAllEmployeeLogins();
+					if(databaseEmployeeLogins.contains(change.getValue())) {
+						return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Employee login not unique"));
 					}
 					employee.setLogin((String) change.getValue());
 					break;
