@@ -44,7 +44,7 @@ URL for POST mapping is http://localhost:8080/users/. All fields must be present
 }
 
 ## Updating employees via PUT requests
-URL for PUT mapping is http://localhost:8080/users/{id}, where {id} is the specified employee to update. All fields except for ID must be present to PUT without errors.
+URL for PUT mapping is http://localhost:8080/users/{id}, where {id} is the id of the specified employee to update. All fields except for id must be present in the JSON object to PUT without errors.
 
 ### Example of an employee JSON object that can be used for PUT requests:
 {
