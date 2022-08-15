@@ -34,7 +34,7 @@ POST the file "CSVTest_duplicateIDs.csv". It should return HTTP Status 400 with 
 ## POST Requests - POSTing Employees to API
 URL for POST mapping is http://localhost:8080/users/. All fields must be present to POST without errors.
 
-### Example of a complete employee json object, no fields missing:
+### Example of a complete employee JSON object, no fields missing:
 {
     "id":"e0011",
     "name":"Nymphadora Tonks",
@@ -44,11 +44,10 @@ URL for POST mapping is http://localhost:8080/users/. All fields must be present
 }
 
 ## Updating employees via PUT requests
-URL for PUT mapping is http://localhost:8080/users/{id}, where {id} is the specified employee to update. All fields must be present to PUT without errors.
+URL for PUT mapping is http://localhost:8080/users/{id}, where {id} is the specified employee to update. All fields except for ID must be present to PUT without errors.
 
-### Example of a complete employee json object, no fields missing:
+### Example of an employee JSON object that can be used for PUT requests:
 {
-    "id":"e0011",
     "name":"Nymphadora Tonks",
     "login":"dontcallmenymphadora",
     "salary":1234.00,
@@ -68,7 +67,7 @@ URL for PATCH mapping is http://localhost:8080/users/{id}, where {id} is the spe
     "startDate":"01-Nov-16"
 }
 
-### Example of a PATCH request to update 2 fields:
+### Example of a PATCH request to update only 2 fields:
 {
     "name":"Nymphadora Tonks",
     "startDate":"01-Nov-20"
