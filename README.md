@@ -5,7 +5,6 @@ To get started, import into Eclipse and run as Java application. Manual testing 
 
 Requires the Lombok plugin for Eclipse.
 
-
 CSV files that I used for testing are included in this repository.
 
 ## Guide for uploading the CSV files to check functionality of POST:
@@ -31,6 +30,67 @@ POST the file "CSVTest_WrongDateFormat.csv". It should return HTTP Status 400 wi
 ### 6. Uploading a CSV file that contains duplicate IDs to the database:
 POST the file "CSVTest_duplicateIDs.csv". It should return HTTP Status 400 with the response *"message": "Duplicate IDs in CSV"*.
 
+
+## POST Requests - POSTing Employees to API
+URL for POST mapping is http://localhost:8080/users/. All fields must be present to POST without errors.
+
+### Example of a complete employee json object, no fields missing:
+{
+    "id":"e0011",
+    "name":"Nymphadora Tonks",
+    "login":"dontcallmenymphadora",
+    "salary":1234.00,
+    "startDate":"01-Nov-16"
+}
+
+## Updating employees via PUT requests
+URL for PUT mapping is http://localhost:8080/users/{id}, where {id} is the specified employee to update. All fields must be present to PUT without errors.
+
+### Example of a complete employee json object, no fields missing:
+{
+    "id":"e0011",
+    "name":"Nymphadora Tonks",
+    "login":"dontcallmenymphadora",
+    "salary":1234.00,
+    "startDate":"01-Nov-16"
+}
+
+Will return HTTP Status 400 if the employee does not exist in the database, details that are to be updated into database contains login details that already exist (i.e. non-unique), or the salary or date fields have issues.
+
+## Updating employees via PATCH requests
+URL for PATCH mapping is http://localhost:8080/users/{id}, where {id} is the specified employee to update. Fields used for PATCHing are name, login, salary and startDate. Any combination of the 4 are allowed for PATCHing.
+
+### Example of a PATCH request to update all 4 fields:
+{
+    "name":"Nymphadora Tonks",
+    "login":"dontcallmenymphadora",
+    "salary":1234.00,
+    "startDate":"01-Nov-16"
+}
+
+### Example of a PATCH request to update 2 fields:
+{
+    "name":"Nymphadora Tonks",
+    "startDate":"01-Nov-20"
+}
+
+Will return HTTP Status 400 if the employee does not exist in the database, details that are to be updated into database contains login details that already exist (i.e. non-unique), or the salary or date fields have issues.
+
+## Deleting employees via DELETE requests
+URL for DELETE mapping is http://localhost:8080/users/{id}, where {id} is the specified employee to delete. Will return HTTP Status 400 if the employee does not exist in the database.
+
+## Retrieving single employee via GET requests
+URL for GET mapping is http://localhost:8080/users/{id}, where {id} is the specified employee to retrieve from database. Will return the employee's details in JSON format, else will return HTTP Status 400 if the employee does not exist in the database.
+
+
+## Retrieving list of employees via GET requests
+URL for GET mapping is http://localhost:8080/users/. By default, not entering GET parameters will return employees who have salary >=0, <4000.00. Supports pagination to provide offsets and limits to the number of employees returned. By default, not entering parameters for offset and limit will return all employees who meet the criteria, with no offset.
+
+Parameters that can be specified are:
+minSalary
+maxSalary
+offset
+limit
 
 ## Design choices
 
