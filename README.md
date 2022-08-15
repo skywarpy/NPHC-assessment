@@ -39,3 +39,12 @@ A H2 database was used as an in-memory database, to avoid actually initialising 
 The salary of employees are saved as BigDecimals, since that data format is more precise than a Double, making it suitable for applications dealing with money. Employees whose salaries are of low scale (e.g. 1.50) are cast as more BigDecimals with a higher scale (e.g. 1.500). This is to accomodate the storage of employees who have higher scaled salaries (e.g. 40.000) since the database has to store BigDecimals with the same level of precision and scale.
 
 I've split the RestControllers into 4 (GET, POST, PATCH/PULL, DELETE) to deal with the various request types, to make it easier to track if the API met the functionalities that were specified by the assessment document.
+
+
+## Potential changes
+
+It might be better to store the salaries as Strings in the database, then cast them to BigDecimals whenever a comparison is needed. The current implementation requires us to know the most granular degree of scale possible (for the test data, it was a scale of 3), and set it in the database. As such, if there were to be another set of data with a more precise scale (e.g. 4) to be stored into the current database, it would lose one level of precision.
+
+Storing as Strings avoids this problem, and should we need to utilise numerical comparisons, we can use the CAST query in JPQL to cast the Strings as BigDecimals.
+
+
